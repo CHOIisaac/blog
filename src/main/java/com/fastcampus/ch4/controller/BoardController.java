@@ -18,6 +18,18 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
+    @GetMapping("/read")
+    public String read(Integer bno, Model m) {
+        try {
+            BoardDto boardDto = boardService.read(bno);
+//        m.addAttribute("boardDto", boardto); //  아래 문장과 같음
+            m.addAttribute(boardDto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "board";
+    }
+
     @GetMapping("/list")
     public String list(Integer page, Integer pageSize, Model m, HttpServletRequest request) {
         if(!loginCheck(request))
