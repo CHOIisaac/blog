@@ -18,6 +18,35 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
+    @PostMapping
+    public String write(BoardDto boardDto, Model m, HttpSession session, RedirectAttributes rttr){
+        String writer = (String) session.getAttribute("id");
+        boardDto.setWriter(writer);
+
+        try {
+            int rowCnt = boardService.write(boardDto);
+
+            if(rowCnt != 1)
+                throw new Exception("Write failed");
+
+            rttr.addFlashAttribute("msg", "writer ok"); //세션을 이용한 일회성 저장
+
+            return "redirect:/board/list";
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.addAttribute(boardDto);
+            rttr.addFlashAttribute("msg", "writer error");
+            return "board";
+        }
+
+    }
+
+    @GetMapping("/write")
+    public String write(Model m){
+        m.addAttribute("mode", "new");
+        return "board";
+    }
+
     @PostMapping("/remove")
     public String remove(Integer bno, Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rttr){
         String wrtier = (String)session.getAttribute("id");
@@ -30,7 +59,7 @@ public class BoardController {
             if(rowCnt != 1)
                 throw new Exception("board remove error");
 
-            rttr.addFlashAttribute("msg", "delete success"); // 메세지 한 번만 출력
+            rttr.addFlashAttribute("msg", "delete success"); // 메세지 한 번만 출력하게 하기 위함
         } catch (Exception e) {
             e.printStackTrace();
             rttr.addFlashAttribute("msg", "delete error");

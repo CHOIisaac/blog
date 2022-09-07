@@ -24,7 +24,10 @@
     if(msg === "delete success") alert("삭제되었습니다.");
     if(msg === "delete error") alert("삭제 실패했습니다.");
 </script>
+
 <div style="text-align:center">
+    <button type="button" id="writeBtn" onclick="location.href='<c:url value="/board/write"/> '">글쓰기</button>
+    <table border="1">
     <tr>
         <th>번호</th>
         <th>제목</th>
@@ -53,6 +56,7 @@
             <a href="<c:url value='/board/list?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/> ">&gt;</a>
         </c:if>
     </div>
+    </table>
 </div>
 </body>
 </html>
