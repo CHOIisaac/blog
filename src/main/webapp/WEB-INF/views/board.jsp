@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <title>fastcampus</title>
     <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 </head>
 <body>
 <div id="menu">
@@ -31,5 +32,22 @@
         <button type="button" id="listBtn" class="btn">목록</button>
     </form>
 </div>
+<script>
+    $(document).ready(function (){
+        $('#listBtn').on("click", function (){
+            location.href = "<c:url value='/board/list'/>?page=${page}&pageSize=${pageSize} ";
+        })
+    })
+    $(document).ready(function (){
+        $('#removeBtn').on("click", function (){
+            if(!confirm("정말로 삭제하시겠습니다?")) return;
+            let form = $('#form');
+            form.attr("action", "<c:url value='/board/remove'/>?age=${page}&pageSize=${pageSize}");
+            form.attr("method", "POST");
+            form.submit();
+
+        })
+    })
+</script>
 </body>
 </html>

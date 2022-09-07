@@ -18,12 +18,35 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
+    @PostMapping("/remove")
+    public String remove(Integer bno, Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rttr){
+        String wrtier = (String)session.getAttribute("id");
+        try {
+            m.addAttribute("pageSize", pageSize);
+            m.addAttribute("page",page);
+
+            int rowCnt = boardService.remove(bno, wrtier);
+
+            if(rowCnt != 1)
+                throw new Exception("board remove error");
+
+            rttr.addFlashAttribute("msg", "delete success"); // 메세지 한 번만 출력
+        } catch (Exception e) {
+            e.printStackTrace();
+            rttr.addFlashAttribute("msg", "delete error");
+        }
+
+        return "redirect:/board/list";
+    }
+
     @GetMapping("/read")
-    public String read(Integer bno, Model m) {
+    public String read(Integer bno, Integer page, Integer pageSize, Model m) {
         try {
             BoardDto boardDto = boardService.read(bno);
 //        m.addAttribute("boardDto", boardto); //  아래 문장과 같음
             m.addAttribute(boardDto);
+            m.addAttribute("page", page);
+            m.addAttribute("pageSize", pageSize);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,6 +72,8 @@ public class BoardController {
             List<BoardDto> list = boardService.getPage(map);
             m.addAttribute("list", list);
             m.addAttribute("ph", pageHandler);
+            m.addAttribute("page", page);
+            m.addAttribute("pageSize", pageSize);
         } catch (Exception e) {
             e.printStackTrace();
         }
