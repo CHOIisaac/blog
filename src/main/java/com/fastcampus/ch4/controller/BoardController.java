@@ -18,7 +18,30 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
-    @PostMapping
+    @PostMapping("/modify")
+    public String modify(BoardDto boardDto, Model m, HttpSession session, RedirectAttributes rttr){
+        String writer = (String) session.getAttribute("id");
+        boardDto.setWriter(writer);
+
+        try {
+            int rowCnt = boardService.modify(boardDto);
+
+            if(rowCnt != 1)
+                throw new Exception("modify failed");
+
+            rttr.addFlashAttribute("msg", "modify ok"); //세션을 이용한 일회성 저장
+
+            return "redirect:/board/list";
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.addAttribute(boardDto);
+            rttr.addFlashAttribute("msg", "modify error");
+            return "board";
+        }
+
+    }
+
+    @PostMapping("/write")
     public String write(BoardDto boardDto, Model m, HttpSession session, RedirectAttributes rttr){
         String writer = (String) session.getAttribute("id");
         boardDto.setWriter(writer);

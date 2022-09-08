@@ -21,6 +21,7 @@
 </div>
 <script>
     let msg = "${msg}";
+    if(msg === "writer ok") alert("등록되었습니다.");
     if(msg === "delete success") alert("삭제되었습니다.");
     if(msg === "delete error") alert("삭제 실패했습니다.");
 </script>
