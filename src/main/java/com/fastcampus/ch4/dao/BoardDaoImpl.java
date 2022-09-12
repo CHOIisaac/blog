@@ -69,4 +69,5 @@ public class BoardDaoImpl implements BoardDao {
     public List<BoardDto> searchSelectPage(SearchCondition sc) throws Exception {
         return session.selectList(namespace+"searchSelectPage", sc);
     } // List<E> selectList(String statement, Object parameter)
+
 }
