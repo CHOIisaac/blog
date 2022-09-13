@@ -3,11 +3,11 @@ package com.fastcampus.ch4.domain;
 import org.springframework.web.util.*;
 
 public class PageHandler {
-    private SearchCondition sc;
     //    private int pageSize = 10; // 한 페이지당 게시물 갯수
 //    private int page; // 현재 페이지
 //    private String  option;
 //    private String  keyword;
+    private SearchCondition sc;
     public final int NAV_SIZE = 10; // page navigation size
     private int totalCnt; // 게시물의 총 갯수
     private int totalPage; // 전체 페이지의 갯수

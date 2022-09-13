@@ -59,4 +59,4 @@ public class BoardServiceImpl implements BoardService {
     public List<BoardDto> getSearchResultPage(SearchCondition sc) throws Exception {
         return boardDao.searchSelectPage(sc);
     }
-}
+ }
