@@ -86,6 +86,7 @@ public class SearchCondition {
         return "SearchCondition{" +
                 "page=" + page +
                 ", pageSize=" + pageSize +
+                ", offset=" + getOffset() +
                 ", option='" + option + '\'' +
                 ", keyword='" + keyword + '\'' +
                 '}';
