@@ -21,8 +21,11 @@ public class CommentController {
     @PatchMapping("/comments/{cno}")
     @ResponseBody
     public ResponseEntity<String> modify(@PathVariable Integer cno, @RequestBody CommentDto dto, HttpSession session){
-        String commenter = (String)session.getAttribute("id");
+//        String commenter = (String)session.getAttribute("id");
+        String commenter = "asdf";
+        dto.setCommenter(commenter);
         dto.setCno(cno);
+
         System.out.println("dto = " + dto);
 
         try {
@@ -40,7 +43,8 @@ public class CommentController {
     @PostMapping("/comments")
     @ResponseBody
     public ResponseEntity<String> write(@RequestBody CommentDto dto, Integer bno, HttpSession session){
-        String commenter = (String)session.getAttribute("id");
+//        String commenter = (String)session.getAttribute("id");
+        String commenter = "asdf";
         dto.setCommenter(commenter);
         dto.setBno(bno);
         System.out.println("dto = " + dto);
@@ -59,12 +63,13 @@ public class CommentController {
     //지정된 댓글을 삭제하는 메서드
     @DeleteMapping("/comments/{cno}")
     @ResponseBody
-    public ResponseEntity<String> remove(@PathVariable Integer bno, Integer cno, HttpSession session){
-        String commenter = (String)session.getAttribute("id");
+    public ResponseEntity<String> remove(@PathVariable Integer cno, Integer bno, HttpSession session){
+//        String commenter = (String)session.getAttribute("id");
+        String commenter = "asdf";
 
         try {
             int rowCnt = service.remove(cno, bno, commenter);
-
+            System.out.println("1111111111111111");
             if(rowCnt != 1)
                 throw new Exception("Delete Failed");
 

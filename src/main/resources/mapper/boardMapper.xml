@@ -56,12 +56,6 @@
         WHERE bno = #{bno} and writer = #{writer}
     </update>
 
-    <update id="updateCommentCnt" parameterType="map">
-        UPDATE board
-        SET   comment_cnt = comment_cnt + #{cnt}
-        WHERE bno = #{bno}
-    </update>
-
     <update id="increaseViewCnt" parameterType="int">
         UPDATE board
         SET   view_cnt = view_cnt + 1

@@ -43,4 +43,5 @@
           , up_date = now()
         WHERE cno = #{cno} and commenter = #{commenter}
     </update>
+
 </mapper>
