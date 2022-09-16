@@ -60,7 +60,7 @@ comment: <input type="text" name="comment"><br>
 
         $("#wrtRepBtn").click(function(){
             let comment = $("input[name=replyComment]").val();
-            let pcno = $("#replyForm").parent().attr("data-cno");
+            let pcno = $("#replyForm").parent().attr("data-pcno");
 
             if(comment.trim() == ''){
                 alert("댓글을 입력해주세요.");
@@ -153,6 +153,8 @@ comment: <input type="text" name="comment"><br>
             tmp += '<li data-cno=' + comment.cno
             tmp += ' data-pcno=' + comment.pcno
             tmp += ' data-bno=' + comment.bno + '>'
+            if(comment.cno != comment.pcno)
+                tmp += 'ㄴ'
             tmp += ' commenter=<span class="commenter">' + comment.commenter + '</span>'
             tmp += ' comment=<span class="comment">' + comment.comment + '</span>'
             tmp += ' up_date='+comment.up_date
